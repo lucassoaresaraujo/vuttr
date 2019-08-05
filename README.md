@@ -94,13 +94,15 @@ yarn test
 ```
 > Para realizar os testes, certifique-se que o servidor não esteja iniciado
 
+> O arquivo `/__tests__/coverage/lcov-report/index.html` possui detalhamentos da cobertura dos testes
+
 ## Documentação
 
 No diretório `docs`encontra-se o arquivo `index.html` com a documentaço da API.
 
 > Em ambiente de desenvolvimento você poderá acessá-la através do seguinte endereço: `http://localhost:3000/`
 
-Para alterar a documentação utilize o arquivo '/docs/api.apib'. 
+Para alterar a documentação utilize o arquivo '/docs/api.apib'.
 > Para atualizar o arquivo `/docs/index.html` instale o [Aglio](https://github.com/danielgtaylor/aglio) e, dentro do diretório `docs`, execute o seguinte comando:
 > ```
 > aglio -i api.apib --theme-full-width --no-theme-condense -o index.html

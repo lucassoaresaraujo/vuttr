@@ -91,12 +91,13 @@ Atualizar um usuário existente
 
 # Group Sessões
 
-Recursos relacionados a sessão
+Alguns recusos da api necessitam o envio do cabeçalho Authentication: Bearer JwtToken.
+Através do recurso de sessão é possivel gerar esse token.
 
 ## Sessões [/sessions]
 
-### Cadastrar sessão [POST]
-Gera um token para login na api
+### Gerar Token JWT [POST]
+Gera um token para autenticação do usuário
 
 + Request (application/json)
     + Attributes (Session)

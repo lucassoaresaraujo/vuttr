@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import path from 'path';
 import Brute from 'express-brute';
 import BruteRedis from 'express-brute-redis';
 
@@ -14,6 +15,12 @@ import validateUserStore from './app/validators/UserStore';
 import validateUserUpdate from './app/validators/UserUpdate';
 
 const routes = new Router();
+
+if (process.env.NODE_ENV === 'development') {
+  routes.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'docs', 'index.html'));
+  });
+}
 
 let bruteForce;
 
