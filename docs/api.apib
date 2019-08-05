@@ -1,0 +1,163 @@
+FORMAT: 1A
+HOST: http://localhost:3000
+
+# VUTTR API
+
+VUTTR (Very Useful Tools to Remember) é um simples repositório para gerenciar ferramentas com seus respectivos nomes, links, descrições e tags.
+
+# Group Ferramentas
+
+Recursos relacionados a ferramentas
+
+## Ferramentas [/tools{?tag}]
+
+### Listar Ferramentas [GET]
++ Parameters
+    + tag: node (string, optional) - tag para filtrar a busca de ferramentas
+
++ Request
+  + Headers
+
+              Authentication: Bearer JwtToken
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[ToolResponse])
+
+### Cadastrar Ferramenta [POST]
+Cria uma nova ferramenta
+
++ Request (application/json)
+    + Headers
+
+                Authentication: Bearer JwtToken
+
+    + Attributes (Tool)
+
++ Response 201 (application/json)
+    + Attributes (ToolResponse)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
++ Response 500 (application/json)
+    + Attributes (InternalServerError)
+
+## Ferramenta [/tools/{id}]
+
+### Deletar Ferramenta [DELETE]
+Deletar uma ferramenta
+
++ Parameters
+    + id: 2 (number, required) - ID da ferramenta
+
++ Request
+  + Headers
+
+              Authentication: Bearer JwtToken
+
++ Response 200
++ Response 404
+
+# Group Usuários
+
+Recursos relacionados a Usuários
+
+## Usuários [/users]
+
+### Cadastrar Usuário [POST]
+Cadastrar um novo usuário
+
++ Request (application/json)
+    + Attributes (User)
+
++ Response 201 (application/json)
+    + Attributes (UserResponse)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+### Atualizar Usuário [PUT]
+Atualizar um usuário existente
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JwtToken
+
+    + Attributes (UserUpdate)
+
++ Response 200 (application/json)
+    + Attributes (UserResponse)
+
+# Group Sessões
+
+Recursos relacionados a sessão
+
+## Sessões [/sessions]
+
+### Cadastrar sessão [POST]
+Gera um token para login na api
+
++ Request (application/json)
+    + Attributes (Session)
+
++ Response 201 (application/json)
+    + Attributes (CreatedSession)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+# Data Structures
+## Tool (object)
++ title: Notion (string, required) - Titulo da ferramenta
++ link: https://notion.so (string, required) - URL da ferramenta
++ description: All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. (string, required) - Descrição da ferramenta
++ tags: organization, planning, collaboration, writing, calendar (array[string], required) - Tags da ferramenta
+
+## ToolResponse (Tool)
++ id: 1 (number) - ID da ferramenta
+
+## Error (object)
++ error: Validation fails (string) - Nome do erro
++ messages (array, optional) - Lista detalhada de erros encontrados
+    + (object) - Objeto para detalhar cada erro de validação encontrado
+        + name: ValidationError (string) - Nome do erro
+        + path: title (string) - indica onde houve o erro, o campo com erro de validação
+        + type: required (string) - tipo de erro de validação
+        + erros: O titulo deve ser informado (array[string]) - Lista das mensagens de erro para o campo informado
+        + inner (array)
+        + message: O titulo deve ser informado (string) - Mensagem do erro encontrado
+        + params (object)
+            + path: title (string) -  campo com erro de validação
+
+## InternalServerError (object)
++ error: Internal server error (string)
+
+## User (object)
++ name: Lucas Soares (string) - Nome do usuário
++ email: lucas.soares.araujo@hotmail.com (string) - Email do usuario
++ password: 123456 (string) - Senha do usuário
+    A senha deve possuir no minimo 6 caracteres.
+
+## UserResponse (object)
++ id: 1 (number) - Identificador do usuário
++ name: Lucas Soares (string) - Nome do usuário
++ email: lucas.soares.araujo@hotmail.com (string) - email do usuário
+
+## UserUpdate (object)
++ name: Lucas Soares (string) - Nome do usuário
++ email: lucas.soares.araujo@hotmail.com (string) - Email do usuario
++ oldPassword: 123456 (string) - Senha antiga
+    Quando for criar uma nova senha, é necessário informar a antiga
++ password: 1234567 (string) - Nova senha do usuário
+    A senha deve possuir no minimo 6 caracteres.
++ confirmPassword: 1234567 (string) - Confirmação da nova senha do usuário
+    ConfirmPassword deve ser igual ao password
+
+## Session (object)
++ email: lucas.soares.araujo@hotmail.com (string, required) - Email do usuario
++ password: 1234567 (string, required) - Senha do usuário
+
+## CreatedSession (object)
++ user (UserResponse)
++ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwLCJpYXQiOjE1NjQ5MDYzMzQsImV4cCI6MTU2NTUxMTEzNH0.TvtXIQXkTPXBordZ7zmqgReQZthq1E6x055o5o5XGf8 (string) - Token jwt

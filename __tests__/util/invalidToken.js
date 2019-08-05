@@ -1,0 +1,1 @@
+export default 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MdSwiaWF0IjoxNTY0NjM1NDU4LCJleHAiOjE1NjUyNDAyNTh9.tLsgzau6e-8OZCSbb1_8IqzycrRRk6JV4THIiqhP5_U';
