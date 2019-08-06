@@ -8,7 +8,9 @@ import RateLimit from 'express-rate-limit';
 import RateLimitRedis from 'rate-limit-redis';
 import Youch from 'youch';
 import 'express-async-errors';
+import * as Sentry from '@sentry/node';
 import routes from './routes';
+import sentryConfig from './config/sentry';
 
 import removeBodyId from './app/middlewares/removeBodyId';
 
@@ -17,12 +19,16 @@ import './database';
 class App {
   constructor() {
     this.server = express();
+
+    Sentry.init(sentryConfig);
+
     this.middlewares();
     this.routes();
     this.exceptionHandler();
   }
 
   middlewares() {
+    this.server.use(Sentry.Handlers.requestHandler());
     this.server.use(cors({ origin: process.env.FRONT_URL }));
     this.server.use(helmet());
     this.server.use(express.json());
@@ -49,6 +55,7 @@ class App {
 
   routes() {
     this.server.use(routes);
+    this.server.use(Sentry.Handlers.errorHandler());
   }
 
   exceptionHandler() {
