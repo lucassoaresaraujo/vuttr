@@ -78,6 +78,12 @@ yarn sequelize db:migrate
 yarn dev
 ```
 
+> Para deploy em produção:
+> ```
+> yarn build
+> yarn start
+> ```
+
 ## Rodando os testes
 
 Certifique-se de possuir o Redis instalado e configurado no arquivo `.env.test`:
