@@ -1,7 +1,5 @@
 import { Router } from 'express';
 import path from 'path';
-import Brute from 'express-brute';
-import BruteRedis from 'express-brute-redis';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -22,27 +20,9 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-let bruteForce;
-
-const bruteStore = new BruteRedis({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-});
-
-if (process.env.NODE_ENV !== 'test') {
-  bruteForce = new Brute(bruteStore, { freeRetries: 3 });
-} else {
-  bruteForce = new Brute(bruteStore, { freeRetries: 1000 });
-}
-
 routes.post('/users', validateUserStore, UserController.store);
 
-routes.post(
-  '/sessions',
-  bruteForce.prevent,
-  validateSessionStore,
-  SessionController.store
-);
+routes.post('/sessions', validateSessionStore, SessionController.store);
 
 routes.use(authMiddleware);
 
