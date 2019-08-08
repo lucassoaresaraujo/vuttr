@@ -78,11 +78,11 @@ yarn sequelize db:migrate
 yarn dev
 ```
 
-> Para deploy em produção:
-> ```
-> yarn build
-> yarn start
-> ```
+#### Para deploy em produção:
+```
+yarn build
+yarn start
+```
 
 ## Rodando os testes
 
