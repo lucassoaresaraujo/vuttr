@@ -107,7 +107,3 @@ Para alterar a documentação utilize o arquivo '/docs/api.apib'.
 > ```
 > aglio -i api.apib --theme-full-width --no-theme-condense -o index.html
 > ```
-
-## Teste online
-
-[Clique aqui](http://167.99.125.91:3000/) para fazer o teste online da api.
