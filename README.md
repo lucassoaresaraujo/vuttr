@@ -2,6 +2,8 @@
 
 VUTTR  (Very Useful Tools to Remember) é um simples repositório para gerenciar ferramentas com seus respectivos nomes, links, descrições e tags.
 
+![build master](https://travis-ci.com/lucassoaresaraujo/vuttr.svg?branch=master)
+
 ## Pré-requisitos
 
 O que você precisa para instalar o software:
